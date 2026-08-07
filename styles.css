@@ -1,0 +1,711 @@
+/* ═══════════════════════════════════════════════════════════
+   VERDFRUT — hoja de estilos
+   Paleta y medidas tomadas directamente de las capturas.
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  /* Marca */
+  --green:          #2f9e44;
+  --green-dark:     #26833a;
+  --green-pale:     #eef7f0;   /* fondo de los círculos de icono */
+  --green-pale-2:   #bfe3c6;   /* punto "próximas expansiones"  */
+  --orange:         #f5871e;
+  --orange-a:       #e77e10;   /* inicio del degradado del CTA  */
+  --orange-b:       #f9a824;   /* fin del degradado del CTA     */
+
+  /* Logotipo (colores del camión) */
+  --wm-green:       #6b8e23;
+  --wm-orange:      #d97b3f;
+
+  /* Texto */
+  --ink:            #1f2937;   /* títulos de sección            */
+  --ink-green:      #3f4a3f;   /* h1 y navegación               */
+  --body:           #5b665b;
+  --body-soft:      #6b756b;
+
+  /* Superficies */
+  --bg:             #ffffff;
+  --bg-alt:         #f6f8f6;
+  --footer-bg:      #133d20;
+  --line:           #eceeec;
+
+  /* Placeholders */
+  --ph-bg:          #f5f5f5;
+  --ph-border:      #c8c8c8;
+  --ph-text:        #7b7b7b;
+
+  --header-h:       88px;      /* main.js lo sincroniza con la altura real */
+  --container:      1280px;   /* era 1140: márgenes laterales más estrechos */
+  --radius:         16px;
+  --shadow:         0 18px 40px -24px rgba(31,41,55,.28);
+
+  /* Escala de espaciado. Todo el ritmo vertical sale de aquí: evita que
+     cada sección invente su propio margen y se desalineen entre sí. */
+  --sp-1:  8px;
+  --sp-2: 16px;
+  --sp-3: 24px;
+  --sp-4: 32px;
+  --sp-5: 48px;
+  --sp-6: 64px;
+  --sp-7: 88px;
+
+  /* Ritmo de sección, elástico con el viewport */
+  --section-y: clamp(72px, 7.5vw, 108px);
+
+  /* Curva de salida única para todo el movimiento de la página */
+  --ease: cubic-bezier(.16,1,.3,1);
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:calc(var(--header-h) + var(--sp-3)); }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+body{
+  margin:0;
+  font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  color:var(--body);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+ul,ol{ margin:0; padding:0; list-style:none; }
+a{ color:inherit; text-decoration:none; }
+h1,h2,h3,h4{
+  margin:0; color:var(--ink); font-weight:700; line-height:1.12; letter-spacing:-.02em;
+  text-wrap:balance;   /* evita la línea huérfana de una palabra en los títulos */
+}
+p{ margin:0 0 1.1em; }
+
+/* En pantallas anchas manda --container (márgenes estrechos, foto grande);
+   por debajo de ~1360px manda el canalón de 40px por lado, que da más aire
+   que los 32px anteriores. Cada tamaño toma la regla que le conviene. */
+.container{ width:min(var(--container),calc(100% - 80px)); margin-inline:auto; }
+.center{ text-align:center; }
+
+/* ── Foco visible ─────────────────────────────────────────
+   No existía ninguno: navegar con teclado era invisible. */
+:where(a,button,[tabindex]):focus-visible{
+  outline:2.5px solid var(--green);
+  outline-offset:3px;
+  border-radius:6px;
+}
+.btn:focus-visible{ outline-offset:4px; }
+.hero.hero-dark .btn-ghost:focus-visible,
+.cta :focus-visible,
+.site-footer :focus-visible{ outline-color:#fff; }
+
+/* Salto al contenido: primer tabulador de la página */
+.skip-link{
+  position:absolute; left:var(--sp-2); top:var(--sp-2); z-index:100;
+  padding:12px 20px; border-radius:999px;
+  background:var(--green); color:#fff; font-weight:600; font-size:15px;
+  transform:translateY(-160%);
+  transition:transform .2s var(--ease);
+}
+.skip-link:focus-visible{ transform:none; }
+
+/* Iconos */
+.ico{ width:20px; height:20px; flex:none; fill:none; stroke:currentColor;
+      stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ── Revelado al hacer scroll ─────────────────────────────
+   Va bajo `.js` a propósito: si el script no corre, el contenido
+   queda visible en lugar de invisible para siempre.
+   Y bajo `no-preference`: con "reducir movimiento" no hay ni opacidad 0. */
+@media (prefers-reduced-motion: no-preference){
+  .js [data-reveal],
+  .js [data-reveal-group] > *{
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity var(--rev-dur,.65s) var(--ease) var(--d,0s),
+               transform var(--rev-dur,.65s) var(--ease) var(--d,0s);
+  }
+  .js [data-reveal].is-in,
+  .js [data-reveal-group].is-in > *{ opacity:1; transform:none; }
+  /* El escalonado se aplica solo al entrar, no al estado inicial */
+  .js [data-reveal-group].is-in > *{
+    transition-delay:calc(var(--d,0s) + var(--i,0) * var(--rev-step,.06s));
+  }
+}
+
+/* ── Logotipo ────────────────────────────────────────────── */
+.brand{ display:block; }
+.brand-mark svg{ width:168px; height:40px; display:block; }
+.wm{ font-family:'Outfit',sans-serif; font-size:46px; font-weight:700; letter-spacing:-.02em; }
+.wm-green{ fill:var(--wm-green); }
+.wm-orange{ fill:var(--wm-orange); }
+.wm-leaf{ fill:var(--wm-green); opacity:.9; }
+.wm-leaf-vein{ fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round; opacity:.75; }
+.brand-tagline{
+  margin:6px 0 0; font-size:10.5px; font-weight:500; letter-spacing:.18em;
+  text-transform:uppercase; color:#9aa39a;
+}
+
+/* ── Botones ─────────────────────────────────────────────── */
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  font-weight:600; font-size:15px; line-height:1;
+  padding:14px 26px; border-radius:999px; border:1.5px solid transparent;
+  cursor:pointer; transition:background .18s, color .18s, border-color .18s, transform .18s, box-shadow .18s;
+}
+.btn-lg{ padding:17px 30px; font-size:16px; }
+.btn-primary{ background:var(--green); color:#fff; box-shadow:0 12px 26px -14px rgba(47,158,68,.9); }
+.btn-primary:hover{ background:var(--green-dark); transform:translateY(-1px); }
+.btn-ghost{ background:#fff; color:var(--green); border-color:#dfe7e0; }
+.btn-ghost:hover{ border-color:var(--green); }
+.btn-white{ background:#fff; color:#e07f14; box-shadow:0 14px 30px -16px rgba(0,0,0,.4); }
+.btn-white:hover{ transform:translateY(-1px); }
+.btn-header{ padding:13px 24px; font-size:14.5px; }
+
+/* ── Header ──────────────────────────────────────────────── */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,.92); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  display:flex; align-items:center; gap:32px;
+  min-height:78px; padding-block:10px;
+}
+.main-nav{ display:flex; gap:30px; margin-left:auto; }
+.main-nav a{
+  position:relative; padding:6px 0;
+  font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink-green); transition:color .18s;
+}
+.main-nav a:hover{ color:var(--green); }
+.main-nav a.is-active{ color:var(--green); }
+.main-nav a.is-active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-2px;
+  height:2.5px; border-radius:2px; background:var(--green);
+}
+.nav-toggle{ display:none; }
+
+/* ── Hero ────────────────────────────────────────────────── */
+.hero{
+  position:relative; isolation:isolate; overflow:hidden;
+  /* Header + hero ocupan exactamente una pantalla.
+     svh evita el salto por la barra del navegador en móvil. */
+  min-height:calc(100vh - var(--header-h));
+  min-height:calc(100svh - var(--header-h));
+  display:flex; align-items:center;
+  padding:64px 0;
+  background:#eef1ee;
+}
+.hero > .container{ width:min(var(--container),calc(100% - 64px)); }
+
+/* Fondo de video */
+.hero-bg{ position:absolute; inset:0; z-index:-1; overflow:hidden; background:#eef1ee; }
+.hero-video{
+  width:100%; height:100%; object-fit:cover; object-position:center 46%;
+  filter:saturate(1.08);
+  transform:scale(1.03);           /* evita el borde claro del desenfoque */
+}
+
+/* Desenfoque en degradado: disimula el reescalado del máster de 464 px
+   detrás del texto y baja a 0 hacia la derecha, donde la imagen se ve limpia.
+   backdrop-filter + mask: una sola copia del video, sin decodificar dos veces. */
+.hero-blur{
+  position:absolute; inset:0; pointer-events:none;
+  backdrop-filter:blur(1px);
+  -webkit-backdrop-filter:blur(1px);
+  -webkit-mask-image:linear-gradient(90deg,
+      #000 0%, #000 32%, rgba(0,0,0,.4) 60%, transparent 80%);
+  mask-image:linear-gradient(90deg,
+      #000 0%, #000 32%, rgba(0,0,0,.4) 60%, transparent 80%);
+}
+
+/* Velo claro: mantiene legible el texto oscuro y deja ver el video a la derecha */
+.hero-scrim{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.96) 0%,
+      rgba(255,255,255,.93) 30%,
+      rgba(255,255,255,.72) 52%,
+      rgba(255,255,255,.42) 74%,
+      rgba(255,255,255,.34) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 22%),
+    /* El video se funde a blanco al final, para que no choque
+       con la sección siguiente en una línea recta */
+    linear-gradient(0deg, #fff 0, rgba(255,255,255,0) 130px);
+}
+
+/* Variante cinematográfica: <section class="hero hero-dark"> */
+.hero-dark .hero-scrim{
+  background:
+    linear-gradient(90deg,
+      rgba(15,42,22,.93) 0%,
+      rgba(15,42,22,.86) 34%,
+      rgba(15,42,22,.6) 62%,
+      rgba(15,42,22,.42) 100%),
+    linear-gradient(180deg, rgba(15,42,22,.45) 0%, rgba(15,42,22,0) 30%),
+    linear-gradient(0deg, #fff 0, rgba(255,255,255,0) 130px);
+}
+/* .hero.hero-dark — especificidad mayor que las reglas base de .hero */
+.hero.hero-dark h1{ color:#fff; }
+.hero.hero-dark h1 .accent{ color:#7ee095; }
+.hero.hero-dark .lead{ color:rgba(255,255,255,.92); }
+.hero.hero-dark .hero-chips li{ color:rgba(255,255,255,.94); }
+.hero.hero-dark .hero-chips .ico{ color:#7ee095; }
+.hero.hero-dark .btn-ghost{ background:transparent; color:#fff; border-color:rgba(255,255,255,.55); }
+.hero.hero-dark .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,.12); }
+
+.hero-grid{ display:grid; }
+.hero-copy{ max-width:548px; }   /* conserva los cortes de línea del diseño aprobado */
+.hero h1{
+  font-size:clamp(2.4rem,4.3vw,3.35rem);
+  font-weight:800; line-height:1.07; letter-spacing:-.035em;
+  color:var(--ink-green); margin-bottom:26px;
+}
+.hero h1 .accent{ color:var(--green); }
+.lead{ font-size:17px; line-height:1.78; max-width:44ch; margin-bottom:32px; }
+
+.hero-actions{ display:flex; flex-wrap:wrap; gap:16px; margin-bottom:40px; }
+
+.hero-chips{
+  display:flex; flex-wrap:wrap; gap:14px 34px;
+  max-width:38rem;
+}
+.hero-chips li{
+  display:flex; align-items:center; gap:9px;
+  font-size:15px; font-weight:500; color:var(--ink-green);
+}
+.hero-chips .ico{ color:var(--green); }
+
+/* Sin video: se usa el póster como imagen de fondo.
+   Aplica a "reducir movimiento", a móvil y a navegadores sin autoplay. */
+.hero-bg.is-static{
+  background:url("assets/hero-fondo.jpg") center 46%/cover no-repeat;
+}
+.hero-bg.is-static .hero-video{ display:none; }
+
+@media (prefers-reduced-motion: reduce){
+  .hero-video{ display:none; }
+  .hero-bg{ background:url("assets/hero-fondo.jpg") center 46%/cover no-repeat; }
+}
+
+/* ── Secciones ───────────────────────────────────────────── */
+.section{ padding:var(--section-y) 0; }
+
+/* Las secciones alternas ya no son una banda plana con dos líneas duras:
+   entran y salen del blanco con un fundido de 120px en cada borde, así que
+   el cambio se siente como una transición y no como un corte.
+   Se usa una medida fija y no un %, para que el fundido sea igual de suave
+   en una sección corta que en una larga. */
+.section-alt{
+  /* Un solo degradado lineal, sin capas encima: cualquier halo radial
+     estaría a máxima intensidad justo en la junta y volvería a dibujar
+     la línea dura que se quiere evitar. Aquí la junta es blanco puro. */
+  background:linear-gradient(180deg,
+    #fff 0,
+    var(--bg-alt) 180px,
+    var(--bg-alt) calc(100% - 180px),
+    #fff 100%);
+}
+
+.eyebrow{
+  font-size:15px; font-weight:600; color:var(--green);
+  letter-spacing:-.01em; margin-bottom:var(--sp-2);
+}
+.h2-tight{ font-size:clamp(1.9rem,3.2vw,2.5rem); margin-bottom:var(--sp-7); }
+.h2-sm{ font-size:clamp(1.5rem,2.3vw,1.85rem); margin-bottom:16px; }
+
+/* Placeholders punteados */
+.ph{
+  position:relative; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:10px; text-align:center;
+  padding:24px; border:2px dashed var(--ph-border); border-radius:var(--radius);
+  background:var(--ph-bg); color:var(--ph-text); font-size:14px; line-height:1.45;
+}
+.ph-ico{ width:26px; height:26px; fill:none; stroke:#b6b6b6; stroke-width:1.7;
+         stroke-linecap:round; stroke-linejoin:round; }
+.ph-wide{ aspect-ratio:16/6.6; margin-bottom:var(--sp-3); }
+.ph-map{ aspect-ratio:1/1.08; }
+
+/* ── Nosotros ────────────────────────────────────────────── */
+.about-grid{
+  display:grid; grid-template-columns:1.3fr 1.25fr .9fr; gap:var(--sp-5); align-items:center;
+}
+.about-copy h2{ font-size:clamp(1.9rem,3.1vw,2.45rem); margin-bottom:var(--sp-3); }
+.about-copy p{ font-size:16.5px; line-height:1.75; max-width:38ch; }
+.about-copy p:last-child{ margin-bottom:0; }
+
+/* Foto del reparto. El recorte vertical se desplaza al 20 %: centrado
+   dejaría el peso en el camión y cortaría las cajas, que son el asunto. */
+.about-photo{ margin:0; }
+.about-photo img{
+  /* height:auto es obligatorio: los atributos width/height del HTML (que evitan
+     el salto de layout al cargar) fijan las dos dimensiones y anularían
+     aspect-ratio, que solo actúa si una de las dos es automática. */
+  width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; object-position:20% center;
+  border-radius:20px;
+  box-shadow:0 28px 56px -30px rgba(31,41,55,.5);
+}
+
+.ico-circle{
+  display:grid; place-items:center; flex:none;
+  width:44px; height:44px; border-radius:50%;
+  background:var(--green-pale); color:var(--green);
+  transition:background .28s var(--ease), color .28s var(--ease);
+}
+.ico-circle.lg{ width:56px; height:56px; }
+.ico-circle.lg .ico{ width:24px; height:24px; }
+.ico-circle.xl{ width:66px; height:66px; }
+.ico-circle.xl .ico{ width:26px; height:26px; }
+
+.pillars{ display:flex; flex-direction:column; gap:26px; }
+.pillars li{
+  display:flex; align-items:center; gap:16px;
+  font-size:17px; font-weight:600; color:var(--ink);
+}
+
+/* ── Frutas que se asoman ─────────────────────────────────
+   Viven al fondo de "¿Quiénes somos?" y quedan recortadas por el borde
+   inferior de la sección, así que parecen esconderse detrás de la
+   siguiente. Se turnan: cada una tiene su propio retraso. */
+#nosotros{
+  position:relative; overflow:hidden;
+  /* Espacio para que las frutas asomen sin invadir el contenido */
+  padding-bottom:max(var(--section-y), 132px);
+}
+
+.peekers{ position:absolute; inset:auto 0 0 0; height:0; pointer-events:none; }
+.peeker{
+  position:absolute; bottom:0; width:auto; height:var(--alto,130px);
+  transform:translateY(100%) rotate(var(--giro,0deg));
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 10px 14px rgba(31,41,55,.18));
+}
+
+/* Asomarse y volver a esconderse. La mayor parte del ciclo está abajo:
+   por eso se sienten ocasionales y no como un carrusel. */
+@keyframes asomarse{
+  0%,  8%  { transform:translateY(100%)          rotate(var(--giro,0deg)); }
+  16%, 30% { transform:translateY(var(--asoma))  rotate(var(--giro,0deg)); }
+  38%,100% { transform:translateY(100%)          rotate(var(--giro,0deg)); }
+}
+
+.peekers.is-live .peeker{
+  animation:asomarse 21s var(--ease) var(--retraso,0s) infinite;
+}
+
+/* --asoma = cuánto queda ESCONDIDO. Menor = se asoma más.
+   No es igual para todas: la piña gasta el 40 % superior de su imagen en la
+   corona y la manzana un 30 % en el tallo y la hoja, así que necesitan subir
+   más para que se les vea la cara, no solo las hojas. */
+.p-pera    { left:4%;   --alto:126px; --giro:-7deg;  --retraso:0s;    --asoma:32%; }
+.p-aguacate{ left:27%;  --alto:138px; --giro:5deg;   --retraso:5.2s;  --asoma:32%; }
+.p-pina    { right:26%; --alto:122px; --giro:-5deg;  --retraso:10.4s; --asoma:18%; }
+.p-manzana { right:4%;  --alto:132px; --giro:8deg;   --retraso:15.6s; --asoma:22%; }
+
+/* Con "reducir movimiento" no se animan: se quedan asomadas y ya. */
+@media (prefers-reduced-motion: reduce){
+  .peeker{ transform:translateY(var(--asoma)) rotate(var(--giro,0deg)); }
+  .peekers.is-live .peeker{ animation:none; }
+}
+
+/* ── Servicios ───────────────────────────────────────────── */
+.cards-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+.card{
+  background:#fff; border:1px solid #eef0ee; border-radius:var(--radius);
+  padding:36px 28px 34px; text-align:center;
+  display:flex; flex-direction:column; align-items:center;
+  box-shadow:0 10px 26px -22px rgba(31,41,55,.35);
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s;
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 22px 40px -26px rgba(31,41,55,.45);
+  border-color:#dcebe0;
+}
+.card:hover .ico-circle{ background:var(--green); color:#fff; }
+.card h3{ font-size:19px; margin:20px 0 12px; }
+.card p{ font-size:15px; line-height:1.62; color:var(--body-soft); margin:0; }
+
+/* ── Proceso ─────────────────────────────────────────────── */
+.process{
+  display:flex; align-items:flex-start; justify-content:space-between;
+  gap:4px; margin-top:var(--sp-5);
+  /* 20% más lento que el resto de la página: son 8 pasos en secuencia y
+     conviene que se lea el orden, no que aparezcan de golpe. */
+  --rev-dur:.78s;
+  --rev-step:.072s;
+}
+.process > li{
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  flex:1 1 0; min-width:0;
+}
+.process .step-label{
+  font-size:14.5px; font-weight:600; color:var(--ink); text-align:center; line-height:1.35;
+}
+.process li.sep{
+  flex:0 0 auto; align-self:center; margin-top:-14px; color:#b9c2b9;
+}
+.process li.sep .ico{ width:18px; height:18px; stroke-width:2.2; }
+
+/* ── Por qué / Tecnología ────────────────────────────────── */
+/* Proceso y "por qué" son la misma unidad narrativa: se separan con
+   medio ritmo en vez de uno completo, para que no se lean como dos temas. */
+.section-why{ padding-top:calc(var(--section-y) * .45); }
+/* En escritorio la lista va a UNA columna y se estrecha.
+   Con 2×4 la columna izquierda medía 307px contra 521px de la derecha: 214px
+   de hueco muerto debajo. En una columna sube a ~520px y las dos terminan casi
+   a la par, sin repartir el vacío: se elimina. De paso el panel de tecnología
+   gana ancho, que es donde va a ir el mockup real. */
+.why-grid{ display:grid; grid-template-columns:.78fr 1.22fr; gap:var(--sp-6); align-items:center; }
+.why-list{ display:grid; grid-template-columns:1fr; gap:22px; }
+/* Con la lista en una columna, el eyebrow centrado quedaba flotando:
+   se alinea con ella. Al apilarse vuelve a ir centrado. */
+.why-col .eyebrow{ text-align:left; }
+.why-list li{
+  display:flex; align-items:center; gap:12px;
+  font-size:15.5px; font-weight:600; color:var(--ink); white-space:nowrap;
+}
+.tech-col p{ font-size:16.5px; line-height:1.7; margin-bottom:26px; }
+.check-list{ display:grid; grid-template-columns:1fr 1fr; gap:16px 28px; }
+.check-list li{ display:flex; align-items:center; gap:11px; font-size:15.5px; color:var(--ink); }
+.check-list .ico{ color:var(--green); }
+
+/* ── Clientes ideales ────────────────────────────────────── */
+/* 3×2 y no 6 en fila: con 6 tarjetas quedan ~195px cada una y cualquier
+   frase se parte en cuatro renglones. A 3 columnas son ~415px y la línea
+   de apoyo cabe en dos. */
+.clients{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:var(--sp-4); }
+.client{ display:flex; flex-direction:column; }
+.ph-client{ aspect-ratio:16/10; font-size:13.5px; padding:16px 12px; }
+.client-body{
+  position:relative; margin-top:-16px; flex:1;
+  background:#fff; border:1px solid #eef0ee; border-radius:var(--radius);
+  padding:32px 18px 22px;
+  box-shadow:0 10px 26px -22px rgba(31,41,55,.35);
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease);
+}
+.client:hover .client-body{
+  transform:translateY(-4px);
+  box-shadow:0 22px 40px -26px rgba(31,41,55,.45);
+}
+.client:hover .ico-circle{ background:var(--green); color:#fff; }
+.client-body .ico-circle{
+  position:absolute; top:-20px; left:20px;
+  width:40px; height:40px; background:#fff;
+  box-shadow:0 4px 14px -6px rgba(31,41,55,.35);
+}
+.client-body .ico-circle .ico{ width:19px; height:19px; }
+.client-body h3{ font-size:16.5px; line-height:1.3; }
+.client-body p{
+  margin:8px 0 0; font-size:14.5px; line-height:1.55; color:var(--body-soft);
+}
+
+/* ── Cobertura ───────────────────────────────────────────── */
+.coverage-head{ max-width:62ch; margin-bottom:var(--sp-6); }
+.coverage-head h2{ font-size:clamp(1.9rem,3.1vw,2.45rem); margin-bottom:var(--sp-3); }
+.lead-sm{ font-size:16.5px; line-height:1.72; margin:0; }
+
+.coverage-grid{
+  display:grid; grid-template-columns:1fr 1.18fr; gap:var(--sp-6); align-items:start;
+}
+.coverage-map{ margin:0; }
+.coverage-map .ph-map{ aspect-ratio:4/3.6; }
+
+/* La leyenda es la clave del mapa: va debajo de él y en horizontal.
+   Antes vivía en la columna de texto, separada de lo que explica. */
+.coverage-map figcaption{ margin-top:var(--sp-3); }
+.legend{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px 22px; }
+.legend li{ display:flex; align-items:center; gap:9px; font-size:14.5px; color:var(--ink-green); }
+.dot{ width:11px; height:11px; border-radius:50%; flex:none; }
+.dot-green{ background:var(--green); }
+.dot-orange{ background:var(--orange); }
+.dot-pale{ background:var(--green-pale-2); }
+
+.stats-col .eyebrow{ margin-bottom:var(--sp-3); }
+.stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+.stat{
+  background:#fff; border:1px solid #eef0ee; border-radius:14px;
+  padding:24px 16px 22px; text-align:center;
+  display:flex; flex-direction:column; align-items:center;
+  box-shadow:0 10px 26px -22px rgba(31,41,55,.35);
+}
+.stat .ico-circle{ width:46px; height:46px; margin-bottom:14px; }
+.stat-num{
+  font-size:34px; font-weight:800; color:var(--green);
+  letter-spacing:-.03em; line-height:1; margin:0 0 10px;
+  /* Cifras de ancho fijo: el conteo animado no reacomoda la tarjeta */
+  font-variant-numeric:tabular-nums;
+}
+.stat-num .stat-unit{ font-size:17px; font-weight:700; }
+.stat-label{ font-size:14px; line-height:1.4; color:var(--body-soft); margin:0; }
+
+/* Cierra la sección con algo que se puede hacer, no solo leer */
+.coverage-ask{
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+  margin-top:18px; padding:22px 26px;
+  border:1.5px solid #dcebe0; border-radius:14px; background:var(--green-pale);
+  color:var(--ink); font-size:15.5px; line-height:1.5;
+  transition:border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.coverage-ask strong{ display:block; color:var(--green); font-size:17px; margin-bottom:2px; }
+.coverage-ask .ico{ color:var(--green); transition:transform .25s var(--ease); }
+.coverage-ask:hover{
+  border-color:var(--green); transform:translateY(-2px);
+  box-shadow:0 16px 30px -22px rgba(47,158,68,.8);
+}
+.coverage-ask:hover .ico{ transform:translateX(4px); }
+
+/* ── CTA ─────────────────────────────────────────────────── */
+.cta{
+  display:grid; grid-template-columns:300px 1fr;
+  background:linear-gradient(90deg,var(--orange-a),var(--orange-b));
+  color:#fff;
+}
+.ph-cta{
+  border:2px dashed rgba(255,255,255,.55); border-radius:0;
+  background:rgba(255,255,255,.08); color:rgba(255,255,255,.9);
+}
+.ph-cta .ph-ico{ stroke:rgba(255,255,255,.85); }
+.cta-inner{
+  display:grid; grid-template-columns:auto 1fr auto;
+  gap:40px; align-items:center;
+  padding:40px 56px 40px 40px;
+}
+.cta-bubble{
+  display:grid; place-items:center; width:70px; height:70px; border-radius:50%;
+  background:rgba(255,255,255,.2);
+}
+.cta-bubble .ico{ width:28px; height:28px; }
+.cta-copy h2{ color:#fff; font-size:clamp(1.6rem,2.7vw,2.15rem); margin-bottom:14px; }
+.cta-copy p{ font-size:16.5px; line-height:1.65; margin:0; color:rgba(255,255,255,.95); max-width:52ch; }
+.cta-actions{ display:flex; flex-direction:column; align-items:center; gap:20px; }
+.cta-phone{
+  display:flex; align-items:center; gap:11px;
+  font-size:21px; font-weight:700; letter-spacing:-.01em;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.site-footer{ background:var(--footer-bg); color:#cfe0d4; padding:72px 0 64px; }
+.footer-grid{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:48px; }
+.footer-mark{
+  display:inline-block; background:#fff; border-radius:12px; padding:10px 14px;
+}
+.footer-mark svg{ width:150px; height:36px; }
+.footer-tagline{ color:#8fae97; margin:16px 0 22px; }
+.social{ display:flex; gap:12px; }
+.social a{
+  display:grid; place-items:center; width:42px; height:42px; border-radius:50%;
+  background:rgba(255,255,255,.09); color:#dcebe0; transition:background .18s;
+}
+.social a:hover{ background:rgba(255,255,255,.18); }
+
+.site-footer h4{ color:#fff; font-size:18px; margin-bottom:20px; }
+.footer-list{ display:flex; flex-direction:column; gap:14px; font-size:15.5px; }
+.footer-list li{ display:flex; align-items:center; gap:11px; }
+.footer-list .ico{ color:var(--green); width:18px; height:18px; }
+.footer-list a:hover{ color:#fff; }
+.footer-list.plain li{ gap:0; }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width:1080px){
+  .about-grid{ grid-template-columns:1fr 1fr; gap:44px; }
+  .pillars{ grid-column:1/-1; flex-direction:row; flex-wrap:wrap; gap:20px 40px; }
+  /* Apilado, la lista vuelve a dos columnas: a lo ancho completo, una sola
+     columna dejaría filas larguísimas y medio renglón vacío. */
+  .why-grid{ grid-template-columns:1fr; gap:52px; }
+  .why-list{ grid-template-columns:1fr 1fr; gap:30px 18px; }
+  .why-col .eyebrow{ text-align:center; }
+  .coverage-grid{ grid-template-columns:1fr; gap:40px; }
+  .coverage-map .ph-map{ aspect-ratio:16/9; }
+  .cards-4{ grid-template-columns:repeat(2,1fr); }
+  .clients{ grid-template-columns:repeat(3,1fr); }
+  .process{ flex-wrap:wrap; justify-content:center; gap:26px 10px; }
+  .process > li{ flex:0 0 130px; }
+  .process li.sep{ display:none; }
+}
+
+/* El header deja de caber antes que el resto del layout: entre 900px y ~1060px
+   la navegación completa más el botón se salían del contenedor y provocaban
+   scroll horizontal. Por eso el menú compacto tiene su propio breakpoint, más
+   alto, y no arrastra al resto. */
+@media (max-width:1080px){
+  .main-nav, .btn-header{ display:none; }
+  .nav-toggle{
+    display:flex; flex-direction:column; justify-content:center; gap:5px;
+    margin-left:auto; width:42px; height:42px; padding:0 9px;
+    background:none; border:0; cursor:pointer;
+  }
+  .nav-toggle span{ height:2px; border-radius:2px; background:var(--ink-green); }
+  .site-header.nav-open .main-nav{
+    display:flex; position:absolute; inset:var(--header-h) 0 auto; flex-direction:column;
+    gap:0; padding:8px 20px 20px; background:#fff; border-bottom:1px solid var(--line);
+  }
+  .site-header.nav-open .main-nav a{ padding:13px 0; }
+}
+
+@media (max-width:900px){
+  .container{ width:calc(100% - 40px); }
+
+  /* En móvil no se reproduce video: ahorra datos y batería, y el recorte
+     vertical dejaría a la vista el logo y los subtítulos incrustados. */
+  .hero{ padding:64px 0 72px; }
+  .hero-video{ display:none; }
+  /* El degradado de desenfoque es horizontal: en móvil, con el texto a una
+     sola columna sobre todo el ancho, no aplica. */
+  .hero-blur{ display:none; }
+  /* En vertical, "cover" mostraría casi todo el cuadro y dejaría a la vista
+     el logo incrustado (arriba) y el subtítulo quemado (abajo). Se amplía
+     el póster para encuadrar solo la franja central limpia. */
+  .hero-bg,
+  .hero-bg.is-static{
+    background:url("assets/hero-fondo.jpg") no-repeat center 46%;
+    background-size:auto 175%;
+  }
+  .hero-scrim{
+    background:linear-gradient(180deg,
+      rgba(255,255,255,.95) 0%, rgba(255,255,255,.9) 55%, rgba(255,255,255,.8) 100%);
+  }
+  .hero-dark .hero-scrim{
+    background:linear-gradient(180deg,
+      rgba(15,42,22,.9) 0%, rgba(15,42,22,.82) 55%, rgba(15,42,22,.78) 100%);
+  }
+  .hero-copy{ max-width:none; }
+
+  /* Cuatro frutas saturan un ancho de móvil: se quedan dos, más chicas */
+  .p-aguacate, .p-pina{ display:none; }
+  .p-pera   { left:2%;  --alto:96px; }
+  .p-manzana{ right:2%; --alto:100px; --retraso:8s; }
+  .section{ padding:64px 0; }
+  .about-grid{ grid-template-columns:1fr; }
+  /* A una columna, 4/5 dejaría una foto desproporcionadamente alta */
+  .about-photo img{ aspect-ratio:4/3; }
+  .coverage-grid{ grid-template-columns:1fr; }
+  .cta{ grid-template-columns:1fr; }
+  .ph-cta{ min-height:180px; }
+  .cta-inner{ grid-template-columns:1fr; gap:28px; padding:44px 24px; text-align:center; }
+  .cta-bubble{ margin-inline:auto; }
+  .cta-copy p{ margin-inline:auto; }
+  .footer-grid{ grid-template-columns:1fr 1fr; gap:40px; }
+}
+
+/* Respeta "reducir movimiento" del sistema por encima de todo lo anterior:
+   anula transiciones, animaciones y el scroll suave. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+@media (max-width:640px){
+  .cards-4{ grid-template-columns:1fr; }
+  /* A dos columnas quedan ~156px por tarjeta y la línea de apoyo se parte
+     en ocho renglones: en móvil va una por fila. */
+  .clients{ grid-template-columns:1fr; }
+  .ph-client{ aspect-ratio:16/7; }
+  .stats{ grid-template-columns:repeat(2,1fr); }
+  .why-list, .check-list{ grid-template-columns:1fr; }
+  .footer-grid{ grid-template-columns:1fr; }
+  .hero-actions .btn{ width:100%; justify-content:center; }
+}

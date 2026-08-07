@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Capturas de referencia del diseño original.
+# Se excluyen porque sus nombres llevan espacios y un carácter invisible
+# (U+202F) que rompe en Windows y en algunos CI. Si el equipo las quiere en
+# el repo, conviene renombrarlas primero a algo como referencia/01.png
+Captura de pantalla*.png

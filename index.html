@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VERDFRUT — Fruta y verdura fresca para empresas</title>
+<meta name="description" content="Abastecemos tiendas de conveniencia, supermercados, restaurantes y cadenas comerciales con entregas puntuales, productos frescos y logística especializada de última milla.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<a class="skip-link" href="#nosotros">Saltar al contenido</a>
+
+<!-- ═══════════════ SPRITE DE ICONOS (lucide) ═══════════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="i-apple"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 13.94 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></g>
+    <g id="i-truck"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></g>
+    <g id="i-warehouse"><path d="M22 8.35V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.35A2 2 0 0 1 3.26 6.5l8-3.2a2 2 0 0 1 1.48 0l8 3.2A2 2 0 0 1 22 8.35Z"/><path d="M6 18h12"/><path d="M6 14h12"/><rect width="12" height="12" x="6" y="10"/></g>
+    <g id="i-cpu"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></g>
+    <g id="i-handshake"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></g>
+    <g id="i-smartphone"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></g>
+    <g id="i-tractor"><path d="M3 4h9l1 7"/><path d="M4 11V4"/><path d="M8 10V4"/><path d="M18 5c-.6 0-1 .4-1 1v5.6"/><path d="m10 11 11 .9c.6 0 .9.5.8 1.1l-.8 5c0 .5-.4.9-1 .9H14"/><circle cx="7" cy="15" r="5"/><circle cx="7" cy="15" r="1"/><circle cx="18" cy="18" r="3"/></g>
+    <g id="i-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></g>
+    <g id="i-package"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></g>
+    <g id="i-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></g>
+    <g id="i-recycle"><path d="M7 19H4.8a1.8 1.8 0 0 1-1.57-.88 1.79 1.79 0 0 1 0-1.79L7.2 9.5"/><path d="M11 19h8.2a1.8 1.8 0 0 0 1.56-.89 1.78 1.78 0 0 0 0-1.78l-1.23-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.29 13.6 7.2 9.5 3.1 10.6"/><path d="m9.34 5.81 1.1-1.89A1.83 1.83 0 0 1 12 3a1.78 1.78 0 0 1 1.55.89l3.94 6.84"/><path d="m13.38 9.63 4.09 1.1 1.1-4.1"/></g>
+    <g id="i-leaf"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></g>
+    <g id="i-clock"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></g>
+    <g id="i-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></g>
+    <g id="i-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></g>
+    <g id="i-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></g>
+    <g id="i-chart"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></g>
+    <g id="i-store"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2 2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/></g>
+    <g id="i-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></g>
+    <g id="i-basket"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"/><path d="M4.5 15.5h15"/><path d="m5 11 4-7"/><path d="m9 11 1 9"/></g>
+    <g id="i-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></g>
+    <g id="i-hotel"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></g>
+    <g id="i-briefcase"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></g>
+    <g id="i-check-circle"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></g>
+    <g id="i-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></g>
+    <g id="i-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></g>
+    <g id="i-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g>
+    <g id="i-chat"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></g>
+    <g id="i-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></g>
+    <g id="i-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></g>
+    <g id="i-chevron-down"><path d="m6 9 6 6 6-6"/></g>
+    <g id="i-chevron-right"><path d="m9 18 6-6-6-6"/></g>
+    <g id="i-image"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.83 0L6 21"/></g>
+  </defs>
+</svg>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="site-header" id="top">
+  <div class="container header-inner">
+
+    <a class="brand" href="#top" aria-label="VERDFRUT — inicio">
+      <span class="brand-mark">
+        <svg viewBox="0 0 260 62" role="img" aria-label="verdfrut">
+          <text x="4" y="46" class="wm wm-green">ver</text>
+          <text x="96" y="46" class="wm wm-orange">D</text>
+          <path class="wm-leaf" d="M148 14c10 6 12 18 6 27-6 9-16 10-16 10s-4-12 1-22c4-9 9-15 9-15z"/>
+          <path class="wm-leaf-vein" d="M147 18c-6 9-8 20-9 33"/>
+          <text x="160" y="46" class="wm wm-green">frut</text>
+        </svg>
+      </span>
+      <span class="brand-tagline">Logística · Frescura · Confianza</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#top" class="is-active">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#tecnologia">Tecnología</a>
+      <a href="#cobertura">Cobertura</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <a href="#contacto" class="btn btn-primary btn-header">
+      Solicitar cotización
+      <svg class="ico" viewBox="0 0 24 24"><use href="#i-chat"/></svg>
+    </a>
+
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+
+  <!-- Fondo de video a sangre completa.
+       El recorte central (object-fit:cover) deja fuera el logo incrustado
+       de arriba y los subtítulos quemados de abajo. -->
+  <div class="hero-bg">
+    <video class="hero-video" autoplay muted loop playsinline
+           preload="auto" poster="assets/hero-fondo.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/hero-fondo.mp4" type="video/mp4">
+    </video>
+    <div class="hero-blur"></div>
+    <div class="hero-scrim"></div>
+  </div>
+
+  <div class="container hero-grid">
+
+    <div class="hero-copy">
+      <h1>
+        <span class="accent">Fruta y Verdura</span><br>
+        Fresca para<br>Empresas
+      </h1>
+
+      <p class="lead">
+        Abastecemos tiendas de conveniencia, supermercados, restaurantes y
+        cadenas comerciales con entregas puntuales, productos frescos y
+        logística especializada de última milla.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contacto" class="btn btn-primary btn-lg">
+          Solicitar cotización
+          <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg>
+        </a>
+        <a href="#servicios" class="btn btn-ghost btn-lg">
+          Conocer nuestros servicios
+          <svg class="ico" viewBox="0 0 24 24"><use href="#i-chevron-down"/></svg>
+        </a>
+      </div>
+
+      <ul class="hero-chips">
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-apple"/></svg>Productos Frescos</li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-truck"/></svg>Última Milla</li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-warehouse"/></svg>HUBs Estratégicos</li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-cpu"/></svg>Tecnología</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ NOSOTROS ═══════════════ -->
+<section class="section" id="nosotros">
+  <div class="container about-grid">
+
+    <figure class="about-photo" data-reveal>
+      <img src="assets/hero-reparto.jpg" width="1086" height="851" loading="lazy"
+           alt="Repartidor de VERDFRUT cargando cajas de fruta y verdura junto al camión de reparto">
+    </figure>
+
+    <div class="about-copy" data-reveal style="--d:.08s">
+      <p class="eyebrow">¿Quiénes somos?</p>
+      <h2>Más que un<br>proveedor,<br>somos un aliado<br>logístico.</h2>
+      <p>En Verdfrut nos especializamos en el suministro de frutas y verduras para empresas.</p>
+      <p>Integramos abastecimiento, almacenamiento, distribución y entrega de última milla para
+         garantizar productos frescos, a tiempo y con total trazabilidad.</p>
+    </div>
+
+    <ul class="pillars" data-reveal-group style="--d:.16s">
+      <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-apple"/></svg></span>Productos Frescos</li>
+      <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-truck"/></svg></span>Última Milla</li>
+      <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-warehouse"/></svg></span>HUBs Estratégicos</li>
+      <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-cpu"/></svg></span>Tecnología</li>
+    </ul>
+
+  </div>
+
+  <!-- Frutas que se asoman por el borde inferior de la sección.
+       Decorativas: ocultas a lectores de pantalla. -->
+  <div class="peekers" aria-hidden="true">
+    <img class="peeker p-pera"     src="assets/frutas/pera.png"     alt="" loading="lazy" width="217" height="300">
+    <img class="peeker p-aguacate" src="assets/frutas/aguacate.png" alt="" loading="lazy" width="216" height="300">
+    <img class="peeker p-pina"     src="assets/frutas/pina.png"     alt="" loading="lazy" width="211" height="300">
+    <img class="peeker p-manzana"  src="assets/frutas/manzana.png"  alt="" loading="lazy" width="229" height="300">
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICIOS ═══════════════ -->
+<section class="section section-alt" id="servicios">
+  <div class="container">
+    <p class="eyebrow center">¿Qué hacemos?</p>
+    <h2 class="center h2-tight">Soluciones logísticas a<br>la medida de tu empresa</h2>
+
+    <div class="cards-4">
+      <article class="card">
+        <span class="ico-circle lg"><svg class="ico" viewBox="0 0 24 24"><use href="#i-handshake"/></svg></span>
+        <h3>Suministro B2B</h3>
+        <p>Abastecimiento de fruta y verdura para cadenas comerciales.</p>
+      </article>
+      <article class="card">
+        <span class="ico-circle lg"><svg class="ico" viewBox="0 0 24 24"><use href="#i-truck"/></svg></span>
+        <h3>Última Milla</h3>
+        <p>Entregas programadas con cobertura regional y personal capacitado.</p>
+      </article>
+      <article class="card">
+        <span class="ico-circle lg"><svg class="ico" viewBox="0 0 24 24"><use href="#i-warehouse"/></svg></span>
+        <h3>HUBs Logísticos</h3>
+        <p>Creamos centros de distribución según el crecimiento del cliente.</p>
+      </article>
+      <article class="card">
+        <span class="ico-circle lg"><svg class="ico" viewBox="0 0 24 24"><use href="#i-smartphone"/></svg></span>
+        <h3>Tecnología</h3>
+        <p>Seguimiento en tiempo real y evidencia digital de cada entrega.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PROCESO ═══════════════ -->
+<section class="section" id="proceso">
+  <div class="container">
+    <p class="eyebrow center">Nuestro proceso</p>
+
+    <ol class="process">
+      <li><span class="ico-circle xl"><svg class="ico" viewBox="0 0 24 24"><use href="#i-tractor"/></svg></span><span class="step-label">Proveedor</span></li>
+      <li class="sep"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chevron-right"/></svg></li>
+      <li><span class="ico-circle xl"><svg class="ico" viewBox="0 0 24 24"><use href="#i-search"/></svg></span><span class="step-label">Selección</span></li>
+      <li class="sep"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chevron-right"/></svg></li>
+      <li><span class="ico-circle xl"><svg class="ico" viewBox="0 0 24 24"><use href="#i-warehouse"/></svg></span><span class="step-label">CEDIS</span></li>
+      <li class="sep"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chevron-right"/></svg></li>
+      <li><span class="ico-circle xl"><svg class="ico" viewBox="0 0 24 24"><use href="#i-package"/></svg></span><span class="step-label">Preparación</span></li>
+      <li class="sep"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chevron-right"/></svg></li>
+      <li><span class="ico-circle xl"><svg class="ico" viewBox="0 0 24 24"><use href="#i-pin"/></svg></span><span class="step-label">Ruta<br>Optimizada</span></li>
+      <li class="sep"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chevron-right"/></svg></li>
+      <li><span class="ico-circle xl"><svg class="ico" viewBox="0 0 24 24"><use href="#i-truck"/></svg></span><span class="step-label">Entrega</span></li>
+      <li class="sep"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chevron-right"/></svg></li>
+      <li><span class="ico-circle xl"><svg class="ico" viewBox="0 0 24 24"><use href="#i-smartphone"/></svg></span><span class="step-label">Evidencia<br>Digital</span></li>
+      <li class="sep"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chevron-right"/></svg></li>
+      <li><span class="ico-circle xl"><svg class="ico" viewBox="0 0 24 24"><use href="#i-recycle"/></svg></span><span class="step-label">Logística<br>Inversa</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════ POR QUÉ / TECNOLOGÍA ═══════════════ -->
+<section class="section section-why" id="tecnologia">
+  <div class="container why-grid">
+
+    <div class="why-col">
+      <p class="eyebrow center">¿Por qué elegirnos?</p>
+      <ul class="why-list">
+        <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-leaf"/></svg></span>Productos Frescos</li>
+        <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-clock"/></svg></span>Entregas Puntuales</li>
+        <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-pin"/></svg></span>Cobertura Regional</li>
+        <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-recycle"/></svg></span>Logística Inversa</li>
+        <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-shield-check"/></svg></span>Trazabilidad Total</li>
+        <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-user"/></svg></span>Atención Personalizada</li>
+        <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-cpu"/></svg></span>Tecnología Propia</li>
+        <li><span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chart"/></svg></span>Escalabilidad Nacional</li>
+      </ul>
+    </div>
+
+    <div class="tech-col">
+      <h2 class="h2-sm">Tecnología que te da visibilidad total</h2>
+      <p>Nuestro ecosistema digital permite visualizar cada entrega, evidencias, incidencias
+         y métricas operativas desde cualquier dispositivo.</p>
+
+      <div class="ph ph-wide">
+        <svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg>
+        <span>Mockup: dashboard web + apps móviles VERDFRUT</span>
+      </div>
+
+      <ul class="check-list">
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg>Mapa en tiempo real</li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg>Tracking del chofer</li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg>Dashboard de indicadores</li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg>Evidencia digital de entrega</li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg>Registro de incidencias</li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg>KPIs operativos</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ CLIENTES IDEALES ═══════════════ -->
+<section class="section section-alt" id="clientes">
+  <div class="container">
+    <p class="eyebrow">Clientes ideales</p>
+
+    <div class="clients">
+      <article class="client">
+        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Tiendas de Conveniencia</span></div>
+        <div class="client-body">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-store"/></svg></span>
+          <h3>Tiendas de Conveniencia</h3>
+          <p>Reabasto frecuente tienda por tienda, con evidencia digital de cada entrega.</p>
+        </div>
+      </article>
+      <article class="client">
+        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Retail</span></div>
+        <div class="client-body">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-cart"/></svg></span>
+          <h3>Retail</h3>
+          <p>Volumen constante para cadenas, con trazabilidad sucursal por sucursal.</p>
+        </div>
+      </article>
+      <article class="client">
+        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Recauderías</span></div>
+        <div class="client-body">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-basket"/></svg></span>
+          <h3>Recauderías</h3>
+          <p>Surtido diario de fruta y verdura, seleccionado y listo para mostrador.</p>
+        </div>
+      </article>
+      <article class="client">
+        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Restaurantes</span></div>
+        <div class="client-body">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-utensils"/></svg></span>
+          <h3>Restaurantes</h3>
+          <p>Entregas programadas en el horario que no interrumpe tu operación.</p>
+        </div>
+      </article>
+      <article class="client">
+        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Hoteles</span></div>
+        <div class="client-body">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-hotel"/></svg></span>
+          <h3>Hoteles</h3>
+          <p>Calidad y volumen parejos, también en picos de ocupación.</p>
+        </div>
+      </article>
+      <article class="client">
+        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Corporativos</span></div>
+        <div class="client-body">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-briefcase"/></svg></span>
+          <h3>Corporativos</h3>
+          <p>Suministro para comedores, con KPIs e indicadores de servicio.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ COBERTURA + NÚMEROS ═══════════════ -->
+<section class="section" id="cobertura">
+  <div class="container">
+
+    <div class="coverage-head">
+      <p class="eyebrow">Cobertura</p>
+      <h2>Dónde entregamos</h2>
+      <p class="lead-sm">Operamos con rutas propias desde nuestros CEDIS y abrimos zonas nuevas
+         según el crecimiento de cada cliente. Si tu operación queda fuera del mapa, cuéntanos:
+         así es como abrimos las rutas que hoy ya tenemos.</p>
+    </div>
+
+    <div class="coverage-grid">
+
+      <!-- La leyenda va pegada al mapa: es su clave, no un bloque de texto suelto -->
+      <figure class="coverage-map">
+        <div class="ph ph-map">
+          <svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg>
+          <span>Mapa de México con estados destacados</span>
+        </div>
+        <figcaption>
+          <ul class="legend">
+            <li><i class="dot dot-green"></i>Cobertura actual</li>
+            <li><i class="dot dot-orange"></i>En expansión</li>
+            <li><i class="dot dot-pale"></i>Próximas expansiones</li>
+          </ul>
+        </figcaption>
+      </figure>
+
+      <div class="stats-col">
+        <p class="eyebrow">Números que nos respaldan</p>
+        <div class="stats">
+        <div class="stat">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-store"/></svg></span>
+          <p class="stat-num"><span class="stat-value" data-count="75">75</span><span class="stat-unit">+</span></p>
+          <p class="stat-label">Puntos de entrega atendidos</p>
+        </div>
+        <div class="stat">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-clock"/></svg></span>
+          <p class="stat-num"><span class="stat-value" data-count="99">99</span><span class="stat-unit">%</span></p>
+          <p class="stat-label">Entregas dentro de la ventana pactada</p>
+        </div>
+        <div class="stat">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-pin"/></svg></span>
+          <p class="stat-num"><span class="stat-value" data-count="400">400</span><span class="stat-unit">km</span></p>
+          <p class="stat-label">Radio de entrega desde cada CEDIS</p>
+        </div>
+        <div class="stat">
+          <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-smartphone"/></svg></span>
+          <p class="stat-num"><span class="stat-value" data-count="100">100</span><span class="stat-unit">%</span></p>
+          <p class="stat-label">Entregas con evidencia digital</p>
+        </div>
+        </div>
+
+        <!-- Convierte la sección en algo accionable en vez de informativa -->
+        <a class="coverage-ask" href="#contacto">
+          <span>
+            <strong>¿No ves tu zona?</strong>
+            Dinos dónde operas y te confirmamos si llegamos.
+          </span>
+          <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta" id="contacto">
+  <div class="ph ph-cta">
+    <svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg>
+    <span>Foto: cajas de verduras (izquierda)</span>
+  </div>
+
+  <div class="cta-inner">
+    <span class="cta-bubble"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chat"/></svg></span>
+
+    <div class="cta-copy">
+      <h2>¿Buscas un proveedor confiable<br>de fruta y verdura?</h2>
+      <p>Conversemos sobre cómo podemos optimizar tu operación logística y
+         garantizar el abastecimiento de tus tiendas.</p>
+    </div>
+
+    <div class="cta-actions">
+      <a href="#contacto" class="btn btn-white btn-lg">
+        Solicitar una reunión
+        <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg>
+      </a>
+      <a href="tel:+525512345678" class="cta-phone">
+        <svg class="ico" viewBox="0 0 24 24"><use href="#i-phone"/></svg>
+        55 1234 5678
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+
+    <div>
+      <span class="brand-mark footer-mark">
+        <svg viewBox="0 0 260 62" role="img" aria-label="verdfrut">
+          <text x="4" y="46" class="wm wm-green">ver</text>
+          <text x="96" y="46" class="wm wm-orange">D</text>
+          <path class="wm-leaf" d="M148 14c10 6 12 18 6 27-6 9-16 10-16 10s-4-12 1-22c4-9 9-15 9-15z"/>
+          <path class="wm-leaf-vein" d="M147 18c-6 9-8 20-9 33"/>
+          <text x="160" y="46" class="wm wm-green">frut</text>
+        </svg>
+      </span>
+      <p class="brand-tagline footer-tagline">Logística · Frescura · Confianza</p>
+      <div class="social">
+        <a href="#" aria-label="LinkedIn"><svg class="ico" viewBox="0 0 24 24"><use href="#i-linkedin"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chat"/></svg></a>
+        <a href="mailto:hola@verdfrut.com" aria-label="Correo"><svg class="ico" viewBox="0 0 24 24"><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+
+    <div>
+      <h4>Contacto</h4>
+      <ul class="footer-list">
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-phone"/></svg><a href="tel:+525512345678">55 1234 5678</a></li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-mail"/></svg><a href="mailto:hola@verdfrut.com">hola@verdfrut.com</a></li>
+        <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-pin"/></svg><span>Ciudad de México</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Enlaces</h4>
+      <ul class="footer-list plain">
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#tecnologia">Tecnología</a></li>
+        <li><a href="#cobertura">Cobertura</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Legal</h4>
+      <ul class="footer-list plain">
+        <li><a href="#">Aviso de privacidad</a></li>
+        <li><a href="#">Términos y condiciones</a></li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
