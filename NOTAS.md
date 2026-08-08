@@ -317,6 +317,22 @@ importan al comprador.
 >   "Entregas por zona" aparece **Monterrey**, que no es ninguno de los ocho
 >   hubs del mapa. Cualquiera que compare las dos imágenes lo nota.
 
+## El mockup va sin encuadre forzado
+
+`.shot-wide` **no lleva `aspect-ratio`** a propósito: manda la proporción de la
+imagen. Al principio se le puso 16/10 con `object-fit:cover` y le recortaba
+260 px de alto al dashboard. Si se le vuelve a fijar un encuadre, se vuelve a
+cortar.
+
+Tampoco se recorta el bloque de texto de la izquierda: se intentó y no hay corte
+vertical limpio — los teléfonos se superponen con ese texto, así que cortarlo
+parte una palabra a la mitad. Va la imagen completa.
+
+Como el mockup completo es más alto, la columna de tecnología crecía y volvía a
+desbalancear la sección. Se compensó con `.95fr 1.05fr` y más separación entre
+los ítems de la lista: quedan 589 px contra 689 px, y `align-items:center`
+reparte esos 100 px arriba y abajo.
+
 ## "Clientes ideales": texto visible, no modal
 
 Se evaluó abrir una ventana al hacer clic en cada tarjeta y **se descartó**:

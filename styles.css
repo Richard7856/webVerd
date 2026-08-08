@@ -307,7 +307,10 @@ p{ margin:0 0 1.1em; }
    si no quedarían fijadas las dos dimensiones y aspect-ratio no haría nada. */
 .shot{ margin:0; overflow:hidden; border-radius:var(--radius); background:var(--bg-alt); }
 .shot img{ width:100%; height:100%; object-fit:cover; display:block; }
-.shot-wide{ aspect-ratio:16/10; margin-bottom:var(--sp-3); }
+/* Sin aspect-ratio a propósito: el mockup se muestra completo, manda su
+   proporción. Forzarle un encuadre le recortaba el dashboard. */
+.shot-wide{ margin-bottom:var(--sp-3); }
+.shot-wide img{ height:auto; }
 .shot-client{ aspect-ratio:16/10; }
 
 /* Las dos categorías sin foto: panel de marca en vez de recuadro punteado,
@@ -451,8 +454,8 @@ p{ margin:0 0 1.1em; }
    de hueco muerto debajo. En una columna sube a ~520px y las dos terminan casi
    a la par, sin repartir el vacío: se elimina. De paso el panel de tecnología
    gana ancho, que es donde va a ir el mockup real. */
-.why-grid{ display:grid; grid-template-columns:.78fr 1.22fr; gap:var(--sp-6); align-items:center; }
-.why-list{ display:grid; grid-template-columns:1fr; gap:22px; }
+.why-grid{ display:grid; grid-template-columns:.95fr 1.05fr; gap:var(--sp-6); align-items:center; }
+.why-list{ display:grid; grid-template-columns:1fr; gap:28px; }
 /* Con la lista en una columna, el eyebrow centrado quedaba flotando:
    se alinea con ella. Al apilarse vuelve a ir centrado. */
 .why-col .eyebrow{ text-align:left; }
