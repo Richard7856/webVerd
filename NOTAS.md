@@ -53,6 +53,18 @@ capturas y coincide con el original.
    El logo se dimensiona con `height` y **`width:auto`** — hace falta porque los
    atributos `width`/`height` del HTML fijarían las dos dimensiones.
 
+   **Versión actual: la de iniciales** (`LOGO_verDfrut_INICIALES`), 2228×428,
+   con el monograma "AM" dentro de la hoja. A 46 px de alto el monograma no se
+   distingue, lo cual está bien: es un detalle de cerca, no de navegación.
+
+   > **Su paleta no es la del sitio.** El logo usa verde olivo `#5b6c08`,
+   > salmón `#e08b4f` y hoja `#cbcf62`. El verde de marca del sitio es
+   > `#2f9e44`, muestreado de las capturas del diseño aprobado. Conviven sin
+   > chocar, pero en el header se ven dos verdes distintos: el del logo y el
+   > del botón. Si se quiere unificar, hay dos caminos —llevar el sitio a la
+   > paleta del logo, o pedir el logo en la versión que corresponda a la
+   > paleta aprobada— y es una decisión de marca, no de código.
+
 2. **Placeholders punteados — ya no queda ninguno.** Todos los recuadros del
    diseño original se sustituyeron por material real:
 
