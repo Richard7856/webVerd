@@ -1,13 +1,37 @@
 /* VERDFRUT — interacciones mínimas */
 
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // Fondo de video del hero: si el navegador bloquea el autoplay,
 // se cae al póster estático en lugar de dejar un hueco.
 const heroVideo = document.querySelector('.hero-video');
+
 if (heroVideo) {
   const useStatic = () => heroVideo.closest('.hero-bg')?.classList.add('is-static');
   heroVideo.addEventListener('error', useStatic);
-  const attempt = heroVideo.play();
-  if (attempt && typeof attempt.catch === 'function') attempt.catch(useStatic);
+
+  // El video también corre en móvil, así que ahora sí importa el costo:
+  // con "ahorro de datos" o en una conexión lenta se queda el póster en vez
+  // de bajar 2.1 MB por datos móviles.
+  const red = navigator.connection;
+  const conexionLimitada = !!red &&
+    (red.saveData === true || /^(slow-2g|2g)$/.test(red.effectiveType || ''));
+
+  if (conexionLimitada || reduceMotion) {
+    useStatic();
+  } else {
+    const intento = heroVideo.play();
+    if (intento && typeof intento.catch === 'function') intento.catch(useStatic);
+
+    // Se pausa al salir de pantalla: no tiene sentido decodificar video
+    // mientras el usuario lee el resto de la página.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) heroVideo.play().catch(() => {});
+        else heroVideo.pause();
+      }, { threshold: 0 }).observe(heroVideo.closest('.hero'));
+    }
+  }
 }
 
 // Menú móvil
@@ -46,8 +70,6 @@ const REVEAL_GROUP = [
   '.hero-chips', '.hero-actions', '.pillars', '.cards-4', '.process',
   '.why-list', '.check-list', '.clients', '.stats', '.legend', '.footer-grid',
 ];
-
-const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (!reduceMotion && 'IntersectionObserver' in window) {
   REVEAL_SINGLE.forEach(sel =>

@@ -59,15 +59,8 @@
   <div class="container header-inner">
 
     <a class="brand" href="#top" aria-label="VERDFRUT — inicio">
-      <span class="brand-mark">
-        <svg viewBox="0 0 260 62" role="img" aria-label="verdfrut">
-          <text x="4" y="46" class="wm wm-green">ver</text>
-          <text x="96" y="46" class="wm wm-orange">D</text>
-          <path class="wm-leaf" d="M148 14c10 6 12 18 6 27-6 9-16 10-16 10s-4-12 1-22c4-9 9-15 9-15z"/>
-          <path class="wm-leaf-vein" d="M147 18c-6 9-8 20-9 33"/>
-          <text x="160" y="46" class="wm wm-green">frut</text>
-        </svg>
-      </span>
+      <img class="brand-mark" src="assets/logo-verdfrut.png" alt=""
+           width="736" height="238">
       <span class="brand-tagline">Logística · Frescura · Confianza</span>
     </a>
 
@@ -259,10 +252,10 @@
       <p>Nuestro ecosistema digital permite visualizar cada entrega, evidencias, incidencias
          y métricas operativas desde cualquier dispositivo.</p>
 
-      <div class="ph ph-wide">
-        <svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg>
-        <span>Mockup: dashboard web + apps móviles VERDFRUT</span>
-      </div>
+      <figure class="shot shot-wide">
+        <img src="assets/tecnologia-dashboard.jpg" width="1100" height="947" loading="lazy"
+             alt="Dashboard web de VERDFRUT en una laptop junto a las apps móviles, mostrando pedidos, entregas a tiempo y productos activos">
+      </figure>
 
       <ul class="check-list">
         <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg>Mapa en tiempo real</li>
@@ -284,7 +277,7 @@
 
     <div class="clients">
       <article class="client">
-        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Tiendas de Conveniencia</span></div>
+        <div class="shot shot-client shot-pendiente"><svg viewBox="0 0 24 24"><use href="#i-store"/></svg></div>
         <div class="client-body">
           <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-store"/></svg></span>
           <h3>Tiendas de Conveniencia</h3>
@@ -292,7 +285,7 @@
         </div>
       </article>
       <article class="client">
-        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Retail</span></div>
+        <figure class="shot shot-client"><img src="assets/clientes/retail.jpg" width="900" height="599" loading="lazy" alt="Piso de exhibición con frutas y verduras surtidas en un centro de distribución VERDFRUT"></figure>
         <div class="client-body">
           <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-cart"/></svg></span>
           <h3>Retail</h3>
@@ -300,7 +293,7 @@
         </div>
       </article>
       <article class="client">
-        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Recauderías</span></div>
+        <figure class="shot shot-client"><img src="assets/clientes/recauderias.jpg" width="900" height="599" loading="lazy" alt="Personal de VERDFRUT atendiendo el mostrador de una recaudería"></figure>
         <div class="client-body">
           <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-basket"/></svg></span>
           <h3>Recauderías</h3>
@@ -308,7 +301,7 @@
         </div>
       </article>
       <article class="client">
-        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Restaurantes</span></div>
+        <figure class="shot shot-client"><img src="assets/clientes/restaurantes.jpg" width="900" height="599" loading="lazy" alt="Repartidor de VERDFRUT entregando una caja de verduras a un chef en la puerta de un restaurante"></figure>
         <div class="client-body">
           <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-utensils"/></svg></span>
           <h3>Restaurantes</h3>
@@ -316,7 +309,7 @@
         </div>
       </article>
       <article class="client">
-        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Hoteles</span></div>
+        <div class="shot shot-client shot-pendiente"><svg viewBox="0 0 24 24"><use href="#i-hotel"/></svg></div>
         <div class="client-body">
           <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-hotel"/></svg></span>
           <h3>Hoteles</h3>
@@ -324,7 +317,7 @@
         </div>
       </article>
       <article class="client">
-        <div class="ph ph-client"><svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg><span>Corporativos</span></div>
+        <figure class="shot shot-client"><img src="assets/clientes/corporativos.jpg" width="900" height="599" loading="lazy" alt="Reunión en una oficina con cajas de fruta y verdura de VERDFRUT sobre la mesa"></figure>
         <div class="client-body">
           <span class="ico-circle"><svg class="ico" viewBox="0 0 24 24"><use href="#i-briefcase"/></svg></span>
           <h3>Corporativos</h3>
@@ -349,17 +342,21 @@
 
     <div class="coverage-grid">
 
-      <!-- La leyenda va pegada al mapa: es su clave, no un bloque de texto suelto -->
       <figure class="coverage-map">
-        <div class="ph ph-map">
-          <svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg>
-          <span>Mapa de México con estados destacados</span>
-        </div>
+        <img src="assets/cobertura-mapa.jpg" width="1280" height="744" loading="lazy"
+             alt="Mapa de México con los ocho hubs logísticos de VERDFRUT">
+        <!-- Los nombres van también como texto: en la imagen no se pueden
+             seleccionar, no los lee un buscador ni un lector de pantalla -->
         <figcaption>
-          <ul class="legend">
-            <li><i class="dot dot-green"></i>Cobertura actual</li>
-            <li><i class="dot dot-orange"></i>En expansión</li>
-            <li><i class="dot dot-pale"></i>Próximas expansiones</li>
+          <ul class="hubs">
+            <li>Ciudad de México</li>
+            <li>Toluca, Edo. de México</li>
+            <li>Guadalajara, Jal.</li>
+            <li>Aguascalientes</li>
+            <li>León, Gto.</li>
+            <li>Guanajuato</li>
+            <li>Mérida, Yucatán</li>
+            <li>Campeche, Camp.</li>
           </ul>
         </figcaption>
       </figure>
@@ -406,10 +403,10 @@
 
 <!-- ═══════════════ CTA ═══════════════ -->
 <section class="cta" id="contacto">
-  <div class="ph ph-cta">
-    <svg class="ph-ico" viewBox="0 0 24 24"><use href="#i-image"/></svg>
-    <span>Foto: cajas de verduras (izquierda)</span>
-  </div>
+  <figure class="cta-shot">
+    <img src="assets/cta-ultima-milla.jpg" width="1000" height="666" loading="lazy"
+         alt="Repartidor de VERDFRUT descargando una caja de fruta y verdura de la camioneta">
+  </figure>
 
   <div class="cta-inner">
     <span class="cta-bubble"><svg class="ico" viewBox="0 0 24 24"><use href="#i-chat"/></svg></span>
@@ -440,14 +437,10 @@
   <div class="container footer-grid">
 
     <div>
-      <span class="brand-mark footer-mark">
-        <svg viewBox="0 0 260 62" role="img" aria-label="verdfrut">
-          <text x="4" y="46" class="wm wm-green">ver</text>
-          <text x="96" y="46" class="wm wm-orange">D</text>
-          <path class="wm-leaf" d="M148 14c10 6 12 18 6 27-6 9-16 10-16 10s-4-12 1-22c4-9 9-15 9-15z"/>
-          <path class="wm-leaf-vein" d="M147 18c-6 9-8 20-9 33"/>
-          <text x="160" y="46" class="wm wm-green">frut</text>
-        </svg>
+      <!-- Caja blanca a propósito: el logo es verde oscuro y se perdería
+           contra el fondo del footer -->
+      <span class="footer-mark">
+        <img src="assets/logo-verdfrut.png" alt="VERDFRUT" width="736" height="238">
       </span>
       <p class="brand-tagline footer-tagline">Logística · Frescura · Confianza</p>
       <div class="social">

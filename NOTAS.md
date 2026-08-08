@@ -41,16 +41,36 @@ capturas y coincide con el original.
 
 ## Decisiones que conviene revisar
 
-1. **Logotipo.** En las capturas el logo aparece como imagen rota (recuadro con
-   "?"). Se reconstruyó como wordmark en SVG inline copiando la marca del camión
-   de la foto: "ver"/"frut" en verde olivo, "D" en naranja y hoja verde. Los
-   colores son `--wm-green` y `--wm-orange` en `styles.css`. Si existe el archivo
-   original del logo, se sustituye ahí.
+1. **Logotipo — ya es el original.** En las capturas aparecía como imagen rota,
+   así que al principio se reconstruyó como wordmark en SVG. **Ese SVG ya se
+   eliminó**: ahora se usa `assets/logo-verdfrut.png`, el archivo real del
+   cliente (736×238, fondo transparente ya recortado, sin halo).
 
-2. **Placeholders punteados.** Los recuadros con línea punteada ("Foto: cajas de
-   verduras…" —ya sustituido por la foto del repartidor—, "Mapa de México…",
-   "Mockup: dashboard…") son parte del diseño original y se replicaron tal cual.
-   Los que quedan siguen esperando material real.
+   En el footer va dentro de una caja blanca **a propósito**: el logo es verde
+   oscuro y sobre `--footer-bg` (#133d20) se perdería. Si algún día hay una
+   versión en blanco del logo, se puede quitar la caja.
+
+   El logo se dimensiona con `height` y **`width:auto`** — hace falta porque los
+   atributos `width`/`height` del HTML fijarían las dos dimensiones.
+
+2. **Placeholders punteados — ya no queda ninguno.** Todos los recuadros del
+   diseño original se sustituyeron por material real:
+
+   | Hueco | Ahora |
+   |---|---|
+   | Foto cajas de verduras | Foto del repartidor (sección "¿Quiénes somos?") |
+   | Mockup dashboard | `assets/tecnologia-dashboard.jpg` |
+   | Mapa de México | `assets/cobertura-mapa.jpg`, con los 8 hubs reales |
+   | Foto CTA (izquierda) | `assets/cta-ultima-milla.jpg` |
+   | Clientes ideales ×6 | 4 con foto; 2 con panel de marca (ver abajo) |
+
+   **Faltan dos fotos: Tiendas de Conveniencia y Hoteles.** Esas tarjetas llevan
+   un panel verde con su icono, no un recuadro punteado, para que la sección se
+   lea terminada. Cuando lleguen las fotos, se cambia el `div.shot-pendiente`
+   por un `figure.shot` con `img`, igual que las otras cuatro.
+
+   La foto del hub logístico **no** se usó para "Tiendas de Conveniencia":
+   muestra un centro de distribución, no una tienda, y habría sido engañosa.
 
 3. **Caja "Drop an image" del footer.** No se replicó: es la zona de arrastre del
    editor de artifacts, no parte del diseño. Si se quiere un espacio de imagen
@@ -87,10 +107,28 @@ No se borran, se dejan fuera de cuadro:
 - **Escritorio:** `object-fit:cover` sobre un hero apaisado muestra solo ~27 %
   del alto del cuadro, centrado en `46 %`. El logo vive en el 7 % superior y el
   subtítulo entre el 84 % y el 95 %: ambos quedan fuera.
-- **Móvil:** ahí `cover` mostraría casi todo el cuadro, así que el póster se
-  amplía con `background-size:auto 175%` para forzar la misma franja limpia.
+- **Móvil:** el video **también se reproduce**. Ahí el contenedor tiene casi la
+  misma proporción que el video, así que `cover` no recorta nada y se vería el
+  cuadro completo. La ampliación `transform:scale(1.75)` deja a la vista solo el
+  **57% central (del 21% al 79% del cuadro)**, que está limpio. El póster de
+  respaldo hace lo mismo con `background-size:auto 175%`.
 
-Si cambias el alto del hero o `object-position`, **revisa que no reaparezcan**.
+Si cambias el alto del hero, `object-position` o ese `scale`, **revisa que no
+reaparezcan**. La comprobación rápida: extraer un fotograma del video y recortar
+la franja visible; si sale sin logo ni subtítulo, está bien.
+
+### Costo en móvil
+
+Al reproducirse también en celular, se añadieron dos frenos en `main.js`:
+
+- **Ahorro de datos**: si `navigator.connection.saveData` está activo o la red
+  es 2g, no se descargan los 2.1 MB — se queda el póster.
+- **Pausa fuera de pantalla**: el video se pausa cuando el hero sale de vista,
+  para no decodificar mientras el usuario lee el resto.
+
+> El máster es de 464 px y en móvil se amplía 1.75×, así que la imagen queda
+> blanda. El velo blanco del hero (opacidad .95 a .8) lo disimula casi todo,
+> pero es otra razón para pedir un máster en mejor resolución.
 
 ## Altura y desenfoque
 
@@ -238,11 +276,20 @@ También: el título pasó de verde a la jerarquía normal (eyebrow verde + h2
 oscuro), como el resto de las secciones, y las cifras pasaron a 2×2 para que la
 columna equilibre al mapa (550 px contra 526 px).
 
-> **Lo que de verdad va a quitarle lo genérico no es diseño: son los datos.**
-> Una sección de cobertura sin nombres de estados o ciudades está vacía por
-> definición. Falta decidir qué estados van en cada color de la leyenda y
-> encargar el mapa. Hasta que eso llegue, la sección está estructurada para
-> recibirlo, pero sigue sin responder "¿llegan a donde estoy?".
+### Los datos ya llegaron
+
+El mapa real trae **ocho hubs**: Ciudad de México, Toluca, Guadalajara,
+Aguascalientes, León, Guanajuato, Mérida y Campeche. Con eso la sección por fin
+responde "¿llegan a donde estoy?".
+
+La leyenda de tres colores (actual / en expansión / próximas) **se eliminó**:
+el mapa real no usa ese código, así que describía algo que no existe. En su
+lugar van los ocho hubs como **texto** bajo el mapa — en la imagen no se pueden
+seleccionar, no los lee un buscador ni un lector de pantalla.
+
+> ⚠️ **La imagen del mapa dice "Mérida, Yucanán".** Es *Yucatán*. En el texto de
+> la página ya está corregido, pero **hay que corregir la imagen** antes de
+> publicar.
 >
 ### Las cuatro cifras
 
@@ -260,11 +307,15 @@ Los iconos se ajustaron a la nueva etiqueta (reloj para la ventana de entrega,
 móvil para la evidencia digital) y el orden pone primero las dos que más le
 importan al comprador.
 
-> **Dos cosas por confirmar con el cliente:**
+> **Por confirmar con el cliente:**
 > - **400 km**: se asumió que es el radio desde cada CEDIS. Si en realidad son
 >   kilómetros de ruta al día o distancia máxima, hay que cambiar la etiqueta.
 > - **99 %**: pasar de "exitosas" a "dentro de la ventana pactada" **acota la
 >   promesa**. Es más creíble y más vendible, pero solo si el dato mide eso.
+> - **El mockup del dashboard contradice dos datos de la página.** En su
+>   pantalla se lee "Entregas a tiempo **98 %**" (la página dice 99 %) y en
+>   "Entregas por zona" aparece **Monterrey**, que no es ninguno de los ocho
+>   hubs del mapa. Cualquiera que compare las dos imágenes lo nota.
 
 ## "Clientes ideales": texto visible, no modal
 

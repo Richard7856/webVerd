@@ -13,10 +13,6 @@
   --orange-a:       #e77e10;   /* inicio del degradado del CTA  */
   --orange-b:       #f9a824;   /* fin del degradado del CTA     */
 
-  /* Logotipo (colores del camión) */
-  --wm-green:       #6b8e23;
-  --wm-orange:      #d97b3f;
-
   /* Texto */
   --ink:            #1f2937;   /* títulos de sección            */
   --ink-green:      #3f4a3f;   /* h1 y navegación               */
@@ -28,11 +24,6 @@
   --bg-alt:         #f6f8f6;
   --footer-bg:      #133d20;
   --line:           #eceeec;
-
-  /* Placeholders */
-  --ph-bg:          #f5f5f5;
-  --ph-border:      #c8c8c8;
-  --ph-text:        #7b7b7b;
 
   --header-h:       88px;      /* main.js lo sincroniza con la altura real */
   --container:      1280px;   /* era 1140: márgenes laterales más estrechos */
@@ -132,12 +123,9 @@ p{ margin:0 0 1.1em; }
 
 /* ── Logotipo ────────────────────────────────────────────── */
 .brand{ display:block; }
-.brand-mark svg{ width:168px; height:40px; display:block; }
-.wm{ font-family:'Outfit',sans-serif; font-size:46px; font-weight:700; letter-spacing:-.02em; }
-.wm-green{ fill:var(--wm-green); }
-.wm-orange{ fill:var(--wm-orange); }
-.wm-leaf{ fill:var(--wm-green); opacity:.9; }
-.wm-leaf-vein{ fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round; opacity:.75; }
+/* width:auto es lo que deja mandar al height: con los atributos width/height
+   del HTML puestos, si no, quedarían fijadas las dos dimensiones. */
+.brand-mark{ height:46px; width:auto; display:block; }
 .brand-tagline{
   margin:6px 0 0; font-size:10.5px; font-weight:500; letter-spacing:.18em;
   text-transform:uppercase; color:#9aa39a;
@@ -199,6 +187,7 @@ p{ margin:0 0 1.1em; }
 /* Fondo de video */
 .hero-bg{ position:absolute; inset:0; z-index:-1; overflow:hidden; background:#eef1ee; }
 .hero-video{
+  display:block;
   width:100%; height:100%; object-fit:cover; object-position:center 46%;
   filter:saturate(1.08);
   transform:scale(1.03);           /* evita el borde claro del desenfoque */
@@ -313,17 +302,24 @@ p{ margin:0 0 1.1em; }
 .h2-tight{ font-size:clamp(1.9rem,3.2vw,2.5rem); margin-bottom:var(--sp-7); }
 .h2-sm{ font-size:clamp(1.5rem,2.3vw,1.85rem); margin-bottom:16px; }
 
-/* Placeholders punteados */
-.ph{
-  position:relative; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:10px; text-align:center;
-  padding:24px; border:2px dashed var(--ph-border); border-radius:var(--radius);
-  background:var(--ph-bg); color:var(--ph-text); font-size:14px; line-height:1.45;
+/* ── Fotos reales en los huecos que antes eran placeholder ──
+   height:auto es obligatorio junto a los atributos width/height del HTML,
+   si no quedarían fijadas las dos dimensiones y aspect-ratio no haría nada. */
+.shot{ margin:0; overflow:hidden; border-radius:var(--radius); background:var(--bg-alt); }
+.shot img{ width:100%; height:100%; object-fit:cover; display:block; }
+.shot-wide{ aspect-ratio:16/10; margin-bottom:var(--sp-3); }
+.shot-client{ aspect-ratio:16/10; }
+
+/* Las dos categorías sin foto: panel de marca en vez de recuadro punteado,
+   para que la sección se lea terminada y no a medias. */
+.shot-pendiente{
+  display:grid; place-items:center;
+  background:linear-gradient(150deg,#eef7f0,#e2f0e6);
 }
-.ph-ico{ width:26px; height:26px; fill:none; stroke:#b6b6b6; stroke-width:1.7;
-         stroke-linecap:round; stroke-linejoin:round; }
-.ph-wide{ aspect-ratio:16/6.6; margin-bottom:var(--sp-3); }
-.ph-map{ aspect-ratio:1/1.08; }
+.shot-pendiente svg{
+  width:44px; height:44px; fill:none; stroke:var(--green);
+  stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; opacity:.5;
+}
 
 /* ── Nosotros ────────────────────────────────────────────── */
 .about-grid{
@@ -475,7 +471,6 @@ p{ margin:0 0 1.1em; }
    de apoyo cabe en dos. */
 .clients{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:var(--sp-4); }
 .client{ display:flex; flex-direction:column; }
-.ph-client{ aspect-ratio:16/10; font-size:13.5px; padding:16px 12px; }
 .client-body{
   position:relative; margin-top:-16px; flex:1;
   background:#fff; border:1px solid #eef0ee; border-radius:var(--radius);
@@ -504,21 +499,30 @@ p{ margin:0 0 1.1em; }
 .coverage-head h2{ font-size:clamp(1.9rem,3.1vw,2.45rem); margin-bottom:var(--sp-3); }
 .lead-sm{ font-size:16.5px; line-height:1.72; margin:0; }
 
+/* El mapa lleva la mayor parte del ancho: ahora carga el contenido real
+   de la sección (ocho hubs con nombre), no un recuadro vacío. */
 .coverage-grid{
-  display:grid; grid-template-columns:1fr 1.18fr; gap:var(--sp-6); align-items:start;
+  display:grid; grid-template-columns:1.45fr 1fr; gap:var(--sp-6); align-items:start;
 }
 .coverage-map{ margin:0; }
-.coverage-map .ph-map{ aspect-ratio:4/3.6; }
+.coverage-map img{
+  width:100%; height:auto; display:block;
+  border-radius:var(--radius); border:1px solid #eceeec;
+}
 
-/* La leyenda es la clave del mapa: va debajo de él y en horizontal.
-   Antes vivía en la columna de texto, separada de lo que explica. */
+/* Los ocho hubs, también como texto seleccionable bajo el mapa */
 .coverage-map figcaption{ margin-top:var(--sp-3); }
-.legend{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px 22px; }
-.legend li{ display:flex; align-items:center; gap:9px; font-size:14.5px; color:var(--ink-green); }
-.dot{ width:11px; height:11px; border-radius:50%; flex:none; }
-.dot-green{ background:var(--green); }
-.dot-orange{ background:var(--orange); }
-.dot-pale{ background:var(--green-pale-2); }
+.hubs{ display:flex; flex-wrap:wrap; gap:8px; }
+.hubs li{
+  display:flex; align-items:center; gap:7px;
+  padding:6px 13px; border-radius:999px;
+  background:var(--green-pale); color:var(--ink-green);
+  font-size:13.5px; font-weight:500;
+}
+.hubs li::before{
+  content:""; width:7px; height:7px; border-radius:50%;
+  background:var(--green); flex:none;
+}
 
 .stats-col .eyebrow{ margin-bottom:var(--sp-3); }
 .stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
@@ -560,11 +564,8 @@ p{ margin:0 0 1.1em; }
   background:linear-gradient(90deg,var(--orange-a),var(--orange-b));
   color:#fff;
 }
-.ph-cta{
-  border:2px dashed rgba(255,255,255,.55); border-radius:0;
-  background:rgba(255,255,255,.08); color:rgba(255,255,255,.9);
-}
-.ph-cta .ph-ico{ stroke:rgba(255,255,255,.85); }
+.cta-shot{ margin:0; overflow:hidden; }
+.cta-shot img{ width:100%; height:100%; object-fit:cover; display:block; }
 .cta-inner{
   display:grid; grid-template-columns:auto 1fr auto;
   gap:40px; align-items:center;
@@ -587,9 +588,9 @@ p{ margin:0 0 1.1em; }
 .site-footer{ background:var(--footer-bg); color:#cfe0d4; padding:72px 0 64px; }
 .footer-grid{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:48px; }
 .footer-mark{
-  display:inline-block; background:#fff; border-radius:12px; padding:10px 14px;
+  display:inline-block; background:#fff; border-radius:12px; padding:12px 16px;
 }
-.footer-mark svg{ width:150px; height:36px; }
+.footer-mark img{ height:38px; width:auto; display:block; }
 .footer-tagline{ color:#8fae97; margin:16px 0 22px; }
 .social{ display:flex; gap:12px; }
 .social a{
@@ -615,7 +616,7 @@ p{ margin:0 0 1.1em; }
   .why-list{ grid-template-columns:1fr 1fr; gap:30px 18px; }
   .why-col .eyebrow{ text-align:center; }
   .coverage-grid{ grid-template-columns:1fr; gap:40px; }
-  .coverage-map .ph-map{ aspect-ratio:16/9; }
+  .coverage-map figcaption{ margin-top:var(--sp-2); }
   .cards-4{ grid-template-columns:repeat(2,1fr); }
   .clients{ grid-template-columns:repeat(3,1fr); }
   .process{ flex-wrap:wrap; justify-content:center; gap:26px 10px; }
@@ -645,10 +646,14 @@ p{ margin:0 0 1.1em; }
 @media (max-width:900px){
   .container{ width:calc(100% - 40px); }
 
-  /* En móvil no se reproduce video: ahorra datos y batería, y el recorte
-     vertical dejaría a la vista el logo y los subtítulos incrustados. */
   .hero{ padding:64px 0 72px; }
-  .hero-video{ display:none; }
+
+  /* En vertical el contenedor tiene casi la misma proporción que el video,
+     así que `cover` no recorta nada: se vería el cuadro completo, con el logo
+     incrustado arriba y los subtítulos quemados abajo. La ampliación deja a la
+     vista solo el 57% central (del 21% al 79% del cuadro), que está limpio.
+     Sube a 1.75 y esos elementos vuelven a asomarse. */
+  .hero-video{ transform:scale(1.75); }
   /* El degradado de desenfoque es horizontal: en móvil, con el texto a una
      sola columna sobre todo el ancho, no aplica. */
   .hero-blur{ display:none; }
@@ -680,7 +685,7 @@ p{ margin:0 0 1.1em; }
   .about-photo img{ aspect-ratio:4/3; }
   .coverage-grid{ grid-template-columns:1fr; }
   .cta{ grid-template-columns:1fr; }
-  .ph-cta{ min-height:180px; }
+  .cta-shot{ min-height:200px; }
   .cta-inner{ grid-template-columns:1fr; gap:28px; padding:44px 24px; text-align:center; }
   .cta-bubble{ margin-inline:auto; }
   .cta-copy p{ margin-inline:auto; }
@@ -703,7 +708,7 @@ p{ margin:0 0 1.1em; }
   /* A dos columnas quedan ~156px por tarjeta y la línea de apoyo se parte
      en ocho renglones: en móvil va una por fila. */
   .clients{ grid-template-columns:1fr; }
-  .ph-client{ aspect-ratio:16/7; }
+  .shot-client{ aspect-ratio:16/8; }
   .stats{ grid-template-columns:repeat(2,1fr); }
   .why-list, .check-list{ grid-template-columns:1fr; }
   .footer-grid{ grid-template-columns:1fr; }
