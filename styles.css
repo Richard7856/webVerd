@@ -313,17 +313,6 @@ p{ margin:0 0 1.1em; }
 .shot-wide img{ height:auto; }
 .shot-client{ aspect-ratio:16/10; }
 
-/* Las dos categorías sin foto: panel de marca en vez de recuadro punteado,
-   para que la sección se lea terminada y no a medias. */
-.shot-pendiente{
-  display:grid; place-items:center;
-  background:linear-gradient(150deg,#eef7f0,#e2f0e6);
-}
-.shot-pendiente svg{
-  width:44px; height:44px; fill:none; stroke:var(--green);
-  stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; opacity:.5;
-}
-
 /* ── Nosotros ────────────────────────────────────────────── */
 .about-grid{
   display:grid; grid-template-columns:1.3fr 1.25fr .9fr; gap:var(--sp-5); align-items:center;

@@ -64,13 +64,17 @@ capturas y coincide con el original.
    | Foto CTA (izquierda) | `assets/cta-ultima-milla.jpg` |
    | Clientes ideales ×6 | 4 con foto; 2 con panel de marca (ver abajo) |
 
-   **Faltan dos fotos: Tiendas de Conveniencia y Hoteles.** Esas tarjetas llevan
-   un panel verde con su icono, no un recuadro punteado, para que la sección se
-   lea terminada. Cuando lleguen las fotos, se cambia el `div.shot-pendiente`
-   por un `figure.shot` con `img`, igual que las otras cuatro.
+   **Las seis tarjetas ya tienen foto real.** Los paneles provisionales se
+   eliminaron junto con su CSS.
 
    La foto del hub logístico **no** se usó para "Tiendas de Conveniencia":
    muestra un centro de distribución, no una tienda, y habría sido engañosa.
+   Se esperó a la foto correcta.
+
+   > ⚠️ **La foto de Hoteles tiene mal el logotipo.** En la camioneta, el polo,
+   > la gorra y la caja se lee **"Dfrut"**: le falta el "ver". Las otras cinco
+   > fotos dicen "verDfrut" correctamente, así que en la misma cuadrícula el
+   > error salta a la vista. Conviene regenerarla.
 
 3. **Caja "Drop an image" del footer.** No se replicó: es la zona de arrastre del
    editor de artifacts, no parte del diseño. Si se quiere un espacio de imagen
@@ -496,5 +500,5 @@ perecedero, las reclamaciones posteriores sin constancia no proceden) y
 
 - Ambas llevan `noindex`: son borradores, no conviene que los indexen.
 - Los enlaces del footer del sitio, que apuntaban a `#`, ya van a estas páginas.
-- El teléfono `55 1234 5678` del sitio sigue siendo el del diseño original y es
-  un número de relleno. No se usó en las páginas legales por eso mismo.
+- El teléfono ya es el real: **55 2760 0464**. Está en la banda CTA, en el
+  footer del sitio y en el de las dos páginas legales.
