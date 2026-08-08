@@ -455,3 +455,46 @@ Todo está en `.p-pera`, `.p-aguacate`, `.p-pina` y `.p-manzana` en
 `styles.css`: `left`/`right` mueven la posición, `--alto` el tamaño, `--giro`
 la inclinación y `--retraso` el turno. La frecuencia se cambia en un solo
 sitio: la duración de la animación en `.peekers.is-live .peeker`.
+
+---
+
+# Páginas legales
+
+`aviso-privacidad.html` y `terminos-y-condiciones.html`. Reutilizan los tokens,
+la tipografía y el footer del sitio; solo cambian a un layout de lectura de
+~72 caracteres de ancho.
+
+> ## ⚠️ Son plantillas de demostración, no documentos válidos
+>
+> Se escribieron **para mostrar cómo se verían las páginas**, no para publicarse.
+> Ninguno ha sido revisado por un abogado. Antes de que el sitio salga a
+> producción, los dos tienen que pasar por revisión legal.
+>
+> Cada página lleva un recuadro ámbar visible que lo advierte. **Ese bloque
+> (`.legal-draft`) se borra cuando el documento esté revisado** — está marcado
+> con un comentario en el HTML.
+
+## De dónde salió el contenido
+
+Solo se usó información que ya estaba en el sitio: giro del negocio, tipos de
+cliente, correo de contacto, Ciudad de México, evidencia digital de entrega y
+logística inversa. **No se inventaron datos de la empresa.**
+
+Lo que falta va marcado en amarillo (`.legal-pendiente`) dentro del texto:
+razón social completa y domicilio fiscal.
+
+El aviso de privacidad sigue la estructura que pide la **LFPDPPP**: responsable,
+datos recabados, finalidades separadas en necesarias y adicionales,
+transferencias, derechos ARCO con plazos, revocación, cookies y conservación.
+
+Los términos incluyen dos apartados propios del giro, que un contrato genérico
+no traería: **revisión del producto al momento de la recepción** (por ser
+perecedero, las reclamaciones posteriores sin constancia no proceden) y
+**logística inversa**.
+
+## Detalles
+
+- Ambas llevan `noindex`: son borradores, no conviene que los indexen.
+- Los enlaces del footer del sitio, que apuntaban a `#`, ya van a estas páginas.
+- El teléfono `55 1234 5678` del sitio sigue siendo el del diseño original y es
+  un número de relleno. No se usó en las páginas legales por eso mismo.
